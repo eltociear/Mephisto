@@ -19,6 +19,10 @@ from io import BytesIO
 from mephisto.abstractions.blueprints.mixins.screen_task_required import (
     ScreenTaskRequired,
 )
+from mephisto.abstractions.blueprints.mixins.use_gold_unit import (
+    UseGoldUnit,
+    get_gold_factory,
+)
 from mephisto.data_model.unit import Unit
 from model import mnist
 
@@ -63,6 +67,7 @@ def main(operator: Operator, cfg: DictConfig) -> None:
     tasks: List[Dict[str, Any]] = [{"isScreeningUnit": False}] * cfg.num_tasks
     mnist_model = mnist(pretrained=True)
     is_using_screening_units = cfg.mephisto.blueprint["use_screening_task"]
+    is_using_gold_labelling = cfg.mephisto.blueprint["use_golds"]
 
     def handle_with_model(
         _request_id: str, args: Dict[str, Any], agent_state: RemoteProcedureAgentState
@@ -100,7 +105,14 @@ def main(operator: Operator, cfg: DictConfig) -> None:
         shared_state.qualifications += ScreenTaskRequired.get_mixin_qualifications(
             cfg.mephisto, shared_state
         )
-
+    if is_using_gold_labelling:
+        shared_state.get_gold_for_worker = get_gold_factory([{}, {}, {}])
+        shared_state.on_unit_submitted = UseGoldUnit.create_validation_function(
+            cfg.mephisto, validate_screening_unit
+        )
+        shared_state.qualifications += UseGoldUnit.get_mixin_qualifications(
+            cfg.mephisto, shared_state
+        )
     task_dir = cfg.task_dir
 
     build_custom_bundle(
