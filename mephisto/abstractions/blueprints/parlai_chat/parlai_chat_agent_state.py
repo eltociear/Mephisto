@@ -69,6 +69,7 @@ class ParlAIChatAgentState(AgentState):
 
     def get_data(self) -> Dict[str, Any]:
         """Return dict with the messages of this agent"""
+        print(f'NUM MESSAGES: {len(self.messages):d}')
         return {
             "outputs": {
                 "messages": self.messages,
