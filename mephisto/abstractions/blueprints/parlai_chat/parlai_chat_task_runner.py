@@ -215,6 +215,7 @@ class ParlAIChatTaskRunner(TaskRunner):
         ParlAI runners will initialize a task world, then run them to completion
         if possible
         """
+        print('START ASSIGNMENT')
         for agent in agents:
             assert agent is not None, "task was not fully assigned"
         opt: Dict[str, Any] = cast("SharedParlAITaskState", self.shared_state).world_opt
@@ -261,6 +262,7 @@ class ParlAIChatTaskRunner(TaskRunner):
         ParlAI runners will initialize a task world, then run them to completion
         if possible
         """
+        print('START UNIT')
         agents = [agent]
         opt: Dict[str, Any] = cast("SharedParlAITaskState", self.shared_state).world_opt
         parlai_agents = [MephistoAgentWrapper(a) for a in agents]
