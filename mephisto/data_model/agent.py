@@ -82,7 +82,6 @@ class _AgentBase(ABC):
         _used_new_call: bool = False,
     ):
         print('STARTING _AgentBase.__init__()')
-        logger.info('STARTING _AgentBase.__init__()')
 
         if not _used_new_call:
             raise AssertionError(
@@ -184,7 +183,6 @@ class _AgentBase(ABC):
         queue the information to be pushed to the user
         """
         print('STARTING observe()')
-        logger.info('STARTING observe()')
         if live_update.get("update_id") is None:
             live_update["update_id"] = str(uuid4())
         self.state.update_data(live_update)
@@ -202,7 +200,6 @@ class _AgentBase(ABC):
         to be returned.
         """
         print('STARTING get_live_update()')
-        logger.info('STARTING get_live_update()')
         if self.pending_actions.empty():
             if timeout is None or timeout == 0:
                 return None
