@@ -81,6 +81,9 @@ class _AgentBase(ABC):
         row: Optional[Mapping[str, Any]] = None,
         _used_new_call: bool = False,
     ):
+        print('STARTING _AgentBase.__init__()')
+        logger.info('STARTING _AgentBase.__init__()')
+
         if not _used_new_call:
             raise AssertionError(
                 "Direct Agent and data model access via ...Agent(db, id) was "
