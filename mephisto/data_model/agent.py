@@ -180,6 +180,8 @@ class _AgentBase(ABC):
         Pass the observed information to the AgentState, then
         queue the information to be pushed to the user
         """
+        print('STARTING observe()')
+        logger.info('STARTING observe()')
         if live_update.get("update_id") is None:
             live_update["update_id"] = str(uuid4())
         self.state.update_data(live_update)
@@ -196,6 +198,8 @@ class _AgentBase(ABC):
         (timeout is None) should return None if no actions are ready
         to be returned.
         """
+        print('STARTING get_live_update()')
+        logger.info('STARTING get_live_update()')
         if self.pending_actions.empty():
             if timeout is None or timeout == 0:
                 return None
