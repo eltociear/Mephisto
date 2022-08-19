@@ -49,10 +49,12 @@ class ParlAIChatAgentState(AgentState):
         """Load stored data from a file to this object"""
         agent_file = self._get_expected_data_file()
         if not self.agent.db.key_exists(agent_file):
+            print('KEY DOESN\'T EXIST!')
             self.messages: List[Dict[str, Any]] = []
             self.final_submission: Optional[Dict[str, Any]] = None
             self.init_data = None
         else:
+            print(f'READING STATE FROM {agent_file}.')
             state = self.agent.db.read_dict(agent_file)
             self.messages = state["outputs"]["messages"]
             self.init_data = state["inputs"]
@@ -120,6 +122,7 @@ class ParlAIChatAgentState(AgentState):
         """Save all messages from this agent to"""
         agent_file = self._get_expected_data_file()
         self.agent.db.write_dict(agent_file, self.get_data())
+        print(f'DATA SAVED TO {agent_file}.')
 
     def update_data(self, live_update: Dict[str, Any]) -> None:
         """
