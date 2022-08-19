@@ -4,6 +4,7 @@
 # This source code is licensed under the MIT license found in the
 # LICENSE file in the root directory of this source tree.
 
+import datetime
 from typing import List, Optional, Dict, Any, Tuple, TYPE_CHECKING
 from mephisto.abstractions._subcomponents.agent_state import (
     AgentState,
@@ -122,6 +123,7 @@ class ParlAIChatAgentState(AgentState):
         """Save all messages from this agent to"""
         agent_file = self._get_expected_data_file()
         self.agent.db.write_dict(agent_file, self.get_data())
+        print(f"SAVING DATA, {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}.")
         print(f'DATA SAVED TO {agent_file}.')
 
     def update_data(self, live_update: Dict[str, Any]) -> None:
