@@ -30,6 +30,8 @@ jobs:
         with:
           fetch-depth: 2
       - uses: actions/setup-node@v3
+        env:
+          FORCE_COLOR: 0
         with:
           cache: "yarn"
           node-version: 16
@@ -76,6 +78,8 @@ jobs:
 
       - name: 🪨 Setup Node
         uses: actions/setup-node@v3
+        env:
+          FORCE_COLOR: 0
         with:
           node-version: 16.16.0
 
@@ -121,6 +125,8 @@ jobs:
 
       - name: 🪨 Setup Node
         uses: actions/setup-node@v3
+        env:
+          FORCE_COLOR: 0
         with:
           node-version: 16.16.0
 
@@ -166,6 +172,8 @@ jobs:
 
       - name: 🪨 Setup Node
         uses: actions/setup-node@v3
+        env:
+          FORCE_COLOR: 0
         with:
           node-version: 16.16.0
 
@@ -210,6 +218,8 @@ jobs:
 
       - name: 🪨 Setup Node
         uses: actions/setup-node@v3
+        env:
+          FORCE_COLOR: 0
         with:
           node-version: 16.16.0
 
@@ -256,6 +266,8 @@ jobs:
 
       - name: 🪨 Setup Node
         uses: actions/setup-node@v3
+        env:
+          FORCE_COLOR: 0
         with:
           node-version: 16.16.0
 
@@ -300,6 +312,8 @@ jobs:
 
       - name: 🪨 Setup Node
         uses: actions/setup-node@v3
+        env:
+          FORCE_COLOR: 0
         with:
           node-version: 16.16.0
 
